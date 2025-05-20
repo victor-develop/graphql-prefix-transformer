@@ -1,6 +1,6 @@
 {
   "name": "graphql-prefix-transformer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool to add prefixes to GraphQL schema entity names",
   "main": "index.js",
   "bin": "index.js",
