@@ -60,33 +60,19 @@ type ShopifyCustomer {
 }
 ```
 
-## Publishing to npm
-
-This package is configured to automatically publish to npm when you create a GitHub release:
-
-1. Set up your GitHub repository with the code
-2. Add your NPM_TOKEN to GitHub repository secrets
-3. Create a new release in GitHub
-4. The GitHub Action will automatically publish to npm
-
-Once published, users can run it with `npx` without installing:
-
-```bash
-npx graphql-prefix-transformer --prefix YourPrefix < schema.graphql
-```
 
 ## Development
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/victor-develop/graphql-prefix-transformer.git
 cd graphql-prefix-transformer
 
 # Install dependencies
 npm install
 
 # Run tests
-npm test
+npm run test
 ```
 
 ## Implementation Details
