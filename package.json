@@ -17,7 +17,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/graphql-prefix-transformer.git"
+    "url": "git+https://github.com/victor-develop/graphql-prefix-transformer.git"
   },
   "publishConfig": {
     "access": "public"
