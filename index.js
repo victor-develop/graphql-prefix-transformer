@@ -9,9 +9,13 @@
  * Usage: cat schema.graphql | npx graphql-prefix-transformer --prefix Shopify
  */
 
-const { parse, print } = require('graphql');
+const { 
+  parse, 
+  print,
+  specifiedScalarTypes,
+  introspectionTypes
+} = require('graphql');
 const { visit } = require('graphql/language/visitor');
-const { getStdin } = require('get-stdin');
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -43,10 +47,10 @@ function addPrefixToSchema(schemaString, prefix) {
     // Names that should not be prefixed
     const reservedNames = new Set([
       'Query', 'Mutation', 'Subscription', 
-      'String', 'Int', 'Float', 'Boolean', 'ID',
-      '__Schema', '__Type', '__TypeKind', '__Field', 
-      '__InputValue', '__EnumValue', '__Directive',
-      '__DirectiveLocation'
+      // Add all built-in scalar types
+      ...specifiedScalarTypes.map(type => type.name),
+      // Add all introspection types
+      ...introspectionTypes.map(type => type.name)
     ]);
     
     // Track renamed types to ensure consistent renaming
@@ -263,6 +267,9 @@ function addPrefixToSchema(schemaString, prefix) {
 // Main function
 async function main() {
   try {
+    // Dynamically import get-stdin (ES module)
+    const { default: getStdin } = await import('get-stdin');
+    
     // Read schema from stdin
     const schemaString = await getStdin();
     

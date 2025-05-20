@@ -1,0 +1,77 @@
+type Query {
+  getOrder(id: ID!): Order
+  getCustomer(id: ID!): Customer
+  searchProducts(query: String!): [Product!]!
+}
+
+type Mutation {
+  createOrder(input: OrderInput!): Order!
+  updateOrderStatus(id: ID!, status: OrderStatus!): Order!
+}
+
+type Order implements Node {
+  id: ID!
+  orderNumber: String!
+  customer: Customer!
+  items: [OrderItem!]!
+  totalAmount: Float!
+  status: OrderStatus!
+  createdAt: DateTime!
+}
+
+type Customer implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  orders: [Order!]!
+}
+
+type OrderItem {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  price: Float!
+}
+
+type Product implements Node {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  category: ProductCategory!
+  inStock: Boolean!
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum ProductCategory {
+  ELECTRONICS
+  CLOTHING
+  BOOKS
+  HOME
+  FOOD
+}
+
+interface Node {
+  id: ID!
+}
+
+union SearchResult = Order | Product | Customer
+
+input OrderInput {
+  customerId: ID!
+  items: [OrderItemInput!]!
+}
+
+input OrderItemInput {
+  productId: ID!
+  quantity: Int!
+}
+
+scalar DateTime

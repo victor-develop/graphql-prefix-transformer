@@ -1,0 +1,8 @@
+.git
+.github
+.gitignore
+test.js
+sample-schema.graphql
+test/
+node_modules/
+*.log

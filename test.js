@@ -84,7 +84,7 @@ console.log('Running GraphQL Schema Prefix Transformer tests...');
 try {
   // Run the transformer
   const transformedSchema = execSync(
-    `node ${path.join(__dirname, 'index.js')} --prefix Shopify`,
+    `node --input-type=module ${path.join(__dirname, 'index.js')} --prefix Shopify`,
     { input: testSchema }
   ).toString();
   
@@ -154,7 +154,7 @@ try {
   // Test with a different prefix
   console.log('\nTest 2: Prefix "Custom"');
   const customPrefixSchema = execSync(
-    `node ${path.join(__dirname, 'index.js')} --prefix Custom`,
+    `node --input-type=module ${path.join(__dirname, 'index.js')} --prefix Custom`,
     { input: testSchema }
   ).toString();
   

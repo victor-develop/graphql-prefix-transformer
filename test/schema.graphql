@@ -1,0 +1,62 @@
+
+type Query {
+  getOrder(id: ID!): Order
+  getCustomer(id: ID!): Customer
+}
+
+type Order {
+  id: ID!
+  orderNumber: String!
+  customer: Customer!
+  items: [OrderItem!]!
+  totalAmount: Float!
+  status: OrderStatus!
+  createdAt: String!
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  email: String!
+  orders: [Order!]!
+}
+
+type OrderItem {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  price: Float!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+interface Node {
+  id: ID!
+}
+
+union SearchResult = Order | Product | Customer
+
+input OrderInput {
+  customerId: ID!
+  items: [OrderItemInput!]!
+}
+
+input OrderItemInput {
+  productId: ID!
+  quantity: Int!
+}
+
+scalar DateTime
